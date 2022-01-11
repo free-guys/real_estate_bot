@@ -1,7 +1,15 @@
 
 /**
  * 세팅한 정보로 부동산 매매 정보를 가져온다.
+ * 
+ * reference data 
+ * api url : http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcNrgTrade?LAWD_CD=11110&DEAL_YMD=201512
+ * serviceKey : DTMk0hJB4csVV7MD0JM%2FpLR6ras7k9zWLEfKREEwaQsqKI3nsNBmg%2Fb7yivnArm9kv7KX012st3L5OyklCs%2BOg%3D%3D
  */
+
+
+
+ getInfo()
 function getInfo(){
     const serviceKey = 'DTMk0hJB4csVV7MD0JM%2FpLR6ras7k9zWLEfKREEwaQsqKI3nsNBmg%2Fb7yivnArm9kv7KX012st3L5OyklCs%2BOg%3D%3D';
     const lawdCd = '11110';
@@ -9,10 +17,10 @@ function getInfo(){
 
     /* Javascript 샘플 코드 */
     const xhr = new XMLHttpRequest();
-    const url = 'http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcLandTrade'; /* URL */
-    const queryParams = '?' + encodeURIComponent('serviceKey') + '=' + encodeURIComponent(serviceKey)   /* Service Key */
-                      + '&' + encodeURIComponent('LAWD_CD')    + '=' + encodeURIComponent(lawdCd)       /* 지역코드 */
-                      + '&' + encodeURIComponent('DEAL_YMD')   + '=' + encodeURIComponent(dealYmd);     /* 해당연월 */
+    const url = 'https://cors-anywhere.herokuapp.com/http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcNrgTrade'; /* URL */
+    const queryParams = '?serviceKey=' + serviceKey   /* Service Key */
+                      + '&LAWD_CD=' + lawdCd       /* 지역코드 */
+                      + '&DEAL_YMD=' + dealYmd;     /* 해당연월 */
     xhr.open('GET', url + queryParams);
     xhr.onreadystatechange = function () {
         if (this.readyState == 4) {
