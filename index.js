@@ -7,30 +7,26 @@
  * serviceKey : DTMk0hJB4csVV7MD0JM%2FpLR6ras7k9zWLEfKREEwaQsqKI3nsNBmg%2Fb7yivnArm9kv7KX012st3L5OyklCs%2BOg%3D%3D
  */
 
-
-
- getInfo()
-function getInfo(){
-    const serviceKey = 'DTMk0hJB4csVV7MD0JM%2FpLR6ras7k9zWLEfKREEwaQsqKI3nsNBmg%2Fb7yivnArm9kv7KX012st3L5OyklCs%2BOg%3D%3D';
-    const lawdCd = '11110';
-    const dealYmd = '202012';
-
-    /* Javascript 샘플 코드 */
-    const xhr = new XMLHttpRequest();
-    const url = 'https://cors-anywhere.herokuapp.com/http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcNrgTrade'; /* URL */
-    const queryParams = '?serviceKey=' + serviceKey   /* Service Key */
-                      + '&LAWD_CD=' + lawdCd       /* 지역코드 */
-                      + '&DEAL_YMD=' + dealYmd;     /* 해당연월 */
-    xhr.open('GET', url + queryParams);
-    xhr.onreadystatechange = function () {
-        if (this.readyState == 4) {
-            alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
-        }
-    };
-
-    xhr.send('');
+ test()
+function test(){
+  axios.get('http://127.0.0.1:52273', {
+    params : {
+      lawdCd : 11110
+      , dealYmd : 202012
+    }
+  })
+  .then(function (response) {
+    // handle success
+    console.log(response);
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  .then(function () {
+    // always executed
+  });
 }
-
 
 /**
  * 세팅한 정보를 초기화한다.
