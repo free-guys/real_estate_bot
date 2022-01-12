@@ -20,7 +20,7 @@ var request = require('request');
 let parseString = require('xml2js').parseString;
 
 app.use(cors({					// front 서버인 127.0.0.1:8080 의 요청을 허용하도록 cors 사용
-   origin: '*',
+   origin: 'http://localhost:3000',
    credentials:true,
 }));
 
