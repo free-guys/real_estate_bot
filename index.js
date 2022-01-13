@@ -11,11 +11,11 @@
 const besUrl = 'http://127.0.0.1:52273';
 
 // api 종류
-const restRTMS = 'restRTMS';        // param : {LAWD_CD, DEAL_YMD}
-const molitLawdCD = 'molitLawdCD';  // param : {page, perPage}
+const restRTMS = 'restRTMS';        // param : {LAWD_CD, DEAL_YMD} json
+const molitLawdCD = 'molitLawdCD';  // param : {page, perPage} xml
 
 let kindApi = '';
-
+getMolitLawdCDData()
 function getMolitLawdCDData(){
   axios.get(besUrl, {
     params : {
@@ -26,7 +26,37 @@ function getMolitLawdCDData(){
   })
   .then(function (response) {
     // handle success
-    console.log(response);
+    /*
+    * selectbox data [{'CHGB_ORGN_CD':'1100', 'CHGB_ORGN_NM' : '서울특별시', children : [{'CHGB_ORGN_CD' : , 'CHGB_ORGN_NM' : },{'CHGB_ORGN_CD' : , 'CHGB_ORGN_NM' : }]},....]
+    */
+    
+    if(response['data'] != null && response['data']['message']['data'].length > 0){
+      let data = response['data']['message']['data'];
+      console.log(data)
+
+      let sidoTemp = 0;
+      let orgnCodeJsonArrIdx = -1;
+      let orgnCodeJsonArr = [];
+      for(let dataIdx=0; dataIdx<data.length; dataIdx++){
+        let sido = data[dataIdx]['시도코드'];
+        let chgbOrgnCd = data[dataIdx]['등록번호용기관코드'];
+        let chgborgnNm = data[dataIdx]['기관명칭'];
+        
+        let orgnCodeJson = {
+          'CHGB_ORGN_CD' : chgbOrgnCd
+          , 'CHGB_ORGN_NM' : chgborgnNm
+        }
+
+        if(sidoTemp != sido || orgnCodeJsonArr.length == 0){
+          orgnCodeJson['children'] = new Array();
+          orgnCodeJsonArr.push(orgnCodeJson);
+          orgnCodeJsonArrIdx++;
+          sidoTemp = sido;
+        } else {
+          orgnCodeJsonArr[orgnCodeJsonArrIdx]['children'].push(orgnCodeJson);
+        }
+      }
+    }
   })
   .catch(function (error) {
     // handle error

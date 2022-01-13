@@ -6,7 +6,7 @@ let parseString = require('xml2js').parseString;
 
 /*
 * 국토교통부_상업업무용 부동산 매매 신고 자료 API
-* param : {LAWD_CD, DEAL_YMD}
+* param : {LAWD_CD, DEAL_YMD} xml
 */ 
 const restRTMS = 'restRTMS';
 const restRTMSUrl = 'http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcNrgTrade';
@@ -14,7 +14,7 @@ const restRTMSServiceKey = 'DTMk0hJB4csVV7MD0JM%2FpLR6ras7k9zWLEfKREEwaQsqKI3nsN
 
 /*
 * 국토교통부_등록번호용 지역코드_20201231
-* param : {page, perPage}
+* param : {page, perPage} json
 */ 
 const molitLawdCD = 'molitLawdCD';
 const molitLawdCDUrl = 'https://api.odcloud.kr/api/15063993/v1/uddi:e6b4e89e-5524-47ef-9db7-eedabf41ed29';  //
@@ -58,8 +58,8 @@ app.get('/', function(req, res){
          apiParamJson = { 'LAWD_CD' : req.query.lawdCd, 'DEAL_YMD' : req.query.dealYmd}
 
       case molitLawdCD:  
-         apiUrl = restRTMSUrl;
-         apiServiceKey = restRTMSServiceKey;
+         apiUrl = molitLawdCDUrl;
+         apiServiceKey = molitLawdCDServiceKey;
          apiParamJson = { 'page' : req.query.page, 'perPage' : req.query.perPage}
 
       default:
@@ -69,21 +69,30 @@ app.get('/', function(req, res){
    let url = urlSetting(apiUrl, apiServiceKey, apiParamJson);
    console.log("# URL : " + url + "\n");
 
+   // data parse 작업을 back으로 할지 font단에서 할지 정해야할듯함
+
    request(url, (err,response,body) => {
       if(err) throw err;
       console.log("# apiData : " + body + "\n");
 
-      parseString(body, (err, result) => {
-         if(err) throw err;
-         let parseData = result;
-         console.log("# apiData(parseXML) : " + body);
-
-         console.log("###############################################\n");
-         return res.status(200).json({       // front Server로 리턴				
-            message: parseData,
+      if(body.indexOf('<?xml') != -1){
+         parseString(body.replace("\ufeff", ""), (err, result) => {
+            if(err) throw err;
+            let parseData = result;
+            console.log("# apiData(parseXML) : " + body);
+   
+            console.log("###############################################\n");
+            return res.status(200).json({       // front Server로 리턴				
+               message: parseData,
+            });
          });
-      });
-      
+      } else {
+         // json
+         return res.status(200).json({       // front Server로 리턴				
+            message: JSON.parse(body),
+         });
+      }
+
    });
 
 });
