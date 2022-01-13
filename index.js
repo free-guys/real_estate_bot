@@ -7,11 +7,41 @@
  * serviceKey : DTMk0hJB4csVV7MD0JM%2FpLR6ras7k9zWLEfKREEwaQsqKI3nsNBmg%2Fb7yivnArm9kv7KX012st3L5OyklCs%2BOg%3D%3D
  */
 
- test()
-function test(){
-  axios.get('http://127.0.0.1:52273', {
+// backendserver url
+const besUrl = 'http://127.0.0.1:52273';
+
+// api 종류
+const restRTMS = 'restRTMS';        // param : {LAWD_CD, DEAL_YMD}
+const molitLawdCD = 'molitLawdCD';  // param : {page, perPage}
+
+let kindApi = '';
+
+function getMolitLawdCDData(){
+  axios.get(besUrl, {
     params : {
-      lawdCd : 11110
+      kindApi : molitLawdCD
+      , page : 1
+      , perPage : 1000
+    }
+  })
+  .then(function (response) {
+    // handle success
+    console.log(response);
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  .then(function () {
+    // always executed
+  });
+}
+
+function getRestRTMSData(){
+  axios.get(besUrl, {
+    params : {
+      kindApi : restRTMS
+      , lawdCd : 11110
       , dealYmd : 202012
     }
   })
