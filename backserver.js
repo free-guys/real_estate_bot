@@ -56,13 +56,14 @@ app.get('/', function(req, res){
          apiUrl = restRTMSUrl;
          apiServiceKey = restRTMSServiceKey;
          apiParamJson = { 'LAWD_CD' : req.query.lawdCd, 'DEAL_YMD' : req.query.dealYmd}
-
+         break;
       case molitLawdCD:  
          apiUrl = molitLawdCDUrl;
          apiServiceKey = molitLawdCDServiceKey;
          apiParamJson = { 'page' : req.query.page, 'perPage' : req.query.perPage}
-
+         break;
       default:
+         break;
          
    }
 
