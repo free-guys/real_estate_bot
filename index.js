@@ -11,8 +11,9 @@
 const besUrl = 'http://127.0.0.1:52273';
 
 // api 종류
-const restRTMS = 'restRTMS';        // param : {LAWD_CD, DEAL_YMD} json
-const molitLawdCD = 'molitLawdCD';  // param : {page, perPage} xml
+const svcNrgTrad = 'svcNrgTrad';            // param : {LAWD_CD, DEAL_YMD} json
+const molitLawdCD = 'molitLawdCD';          // param : {page, perPage} xml
+const svcAptTradeDev = 'svcAptTradeDev';    // param : {LAWD_CD, DEAL_YMD} json
 
 let kindApi = '';
 getMolitLawdCDData()
@@ -67,10 +68,31 @@ function getMolitLawdCDData(){
   });
 }
 
-function getRestRTMSData(){
+function getRTMSDataSvcNrgTrade(){
   axios.get(besUrl, {
     params : {
-      kindApi : restRTMS
+      kindApi : svcNrgTrad
+      , lawdCd : 11110
+      , dealYmd : 202012
+    }
+  })
+  .then(function (response) {
+    // handle success
+    console.log(response);
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  .then(function () {
+    // always executed
+  });
+}
+getRTMSDataSvcAptTradeDev()
+function getRTMSDataSvcAptTradeDev(){
+  axios.get(besUrl, {
+    params : {
+      kindApi : svcAptTradeDev
       , lawdCd : 11110
       , dealYmd : 202012
     }

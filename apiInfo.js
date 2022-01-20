@@ -10,12 +10,17 @@ module.exports = {
             case svcNrgTrad:  
                apiUrl = svcNrgTradUrl;
                apiServiceKey = svcNrgTradServiceKey;
-               apiParamJson = { 'LAWD_CD' : req.query.lawdCd, 'DEAL_YMD' : req.query.dealYmd}
+               apiParamJson = { 'LAWD_CD' : req.query.lawdCd, 'DEAL_YMD' : req.query.dealYmd }
+               break;
+            case svcAptTradeDev:  
+               apiUrl = svcAptTradeDevUrl;
+               apiServiceKey = svcAptTradeDevServiceKey;
+               apiParamJson = { 'LAWD_CD' : req.query.lawdCd, 'DEAL_YMD' : req.query.dealYmd }
                break;
             case molitLawdCD:  
                apiUrl = molitLawdCDUrl;
                apiServiceKey = molitLawdCDServiceKey;
-               apiParamJson = { 'page' : req.query.page, 'perPage' : req.query.perPage}
+               apiParamJson = { 'page' : req.query.page, 'perPage' : req.query.perPage }
                break;
             default:
                break;
@@ -27,6 +32,12 @@ module.exports = {
          return url
     }
 };
+
+function urlSetting(url, serviceKey, jsonParam){
+   let retUrl = url + '?serviceKey=' + serviceKey;
+   if(jsonParam != null) for(key in jsonParam){retUrl += '&' + key + '=' + encodeURIComponent(jsonParam[key])}
+   return retUrl;
+}
 
 /*
 * 국토교통부_상업업무용 부동산 매매 신고 자료 API
@@ -41,22 +52,16 @@ const svcNrgTradServiceKey = 'DTMk0hJB4csVV7MD0JM%2FpLR6ras7k9zWLEfKREEwaQsqKI3n
 * param : {page, perPage} json
 */ 
 const molitLawdCD = 'molitLawdCD';
-const molitLawdCDUrl = 'https://api.odcloud.kr/api/15063993/v1/uddi:e6b4e89e-5524-47ef-9db7-eedabf41ed29';  //
+const molitLawdCDUrl = 'https://api.odcloud.kr/api/15063993/v1/uddi:e6b4e89e-5524-47ef-9db7-eedabf41ed29';
 const molitLawdCDServiceKey = 'DTMk0hJB4csVV7MD0JM%2FpLR6ras7k9zWLEfKREEwaQsqKI3nsNBmg%2Fb7yivnArm9kv7KX012st3L5OyklCs%2BOg%3D%3D';
-
-function urlSetting(url, serviceKey, jsonParam){
-    let retUrl = url + '?serviceKey=' + serviceKey;
-    if(jsonParam != null) for(key in jsonParam){retUrl += '&' + key + '=' + jsonParam[key]}
-    return retUrl;
- }
 
  /*
  * 국토교통부_아파트매매 실거래 상세 자료
- * 
+ * param : {LAWD_CD, DEAL_YMD} xml
  */
 const svcAptTradeDev = 'svcAptTradeDev';
 const svcAptTradeDevUrl = 'http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev';
-const svcAptTradeDevServiceKey = '%2FWi59SrBVyo4exN0W02ibQiDuxLExBwGr7zxFDsjvtYOG1lLnGFGeI5OibY0O8IwS5COck%2FSAhbdU%2BN6hxewTA%3D%3D';
+const svcAptTradeDevServiceKey = '/Wi59SrBVyo4exN0W02ibQiDuxLExBwGr7zxFDsjvtYOG1lLnGFGeI5OibY0O8IwS5COck/SAhbdU+N6hxewTA==';
 
 /*
 *  국토교통부_아파트 전월세 자료
