@@ -61,7 +61,7 @@ const molitLawdCDServiceKey = 'DTMk0hJB4csVV7MD0JM%2FpLR6ras7k9zWLEfKREEwaQsqKI3
  */
 const svcAptTradeDev = 'svcAptTradeDev';
 const svcAptTradeDevUrl = 'http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev';
-const svcAptTradeDevServiceKey = '/Wi59SrBVyo4exN0W02ibQiDuxLExBwGr7zxFDsjvtYOG1lLnGFGeI5OibY0O8IwS5COck/SAhbdU+N6hxewTA==';
+const svcAptTradeDevServiceKey = '%2FWi59SrBVyo4exN0W02ibQiDuxLExBwGr7zxFDsjvtYOG1lLnGFGeI5OibY0O8IwS5COck%2FSAhbdU%2BN6hxewTA%3D%3D';
 
 /*
 *  국토교통부_아파트 전월세 자료
@@ -69,7 +69,7 @@ const svcAptTradeDevServiceKey = '/Wi59SrBVyo4exN0W02ibQiDuxLExBwGr7zxFDsjvtYOG1
 */
 const svcAptRent = 'svcAptRent';
 const svcAptRentUrl = 'http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptRent';
-const svcAptRentServiceKey = '/Wi59SrBVyo4exN0W02ibQiDuxLExBwGr7zxFDsjvtYOG1lLnGFGeI5OibY0O8IwS5COck/SAhbdU+N6hxewTA==';
+const svcAptRentServiceKey = '%2FWi59SrBVyo4exN0W02ibQiDuxLExBwGr7zxFDsjvtYOG1lLnGFGeI5OibY0O8IwS5COck%2FSAhbdU%2BN6hxewTA%3D%3D';
 
 /*
 *  국토교통부_오피스텔 매매 신고 조회 서비스
