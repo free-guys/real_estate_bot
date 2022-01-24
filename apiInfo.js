@@ -6,22 +6,67 @@ module.exports = {
         let apiServiceKey = '';
         let apiParamJson = {};
         switch(kindApi) {
-
+            // 국토교통부_상업업무용 부동산 매매 신고 자료 API
             case svcNrgTrad:  
                apiUrl = svcNrgTradUrl;
                apiServiceKey = svcNrgTradServiceKey;
                apiParamJson = { 'LAWD_CD' : req.query.lawdCd, 'DEAL_YMD' : req.query.dealYmd }
                break;
+            // 국토교통부_아파트매매 실거래 상세 자료
             case svcAptTradeDev:  
                apiUrl = svcAptTradeDevUrl;
                apiServiceKey = svcAptTradeDevServiceKey;
                apiParamJson = { 'LAWD_CD' : req.query.lawdCd, 'DEAL_YMD' : req.query.dealYmd }
                break;
+            // 국토교통부_아파트 전월세 자료
+            case svcAptRent:  
+               apiUrl = svcAptRentCDUrl;
+               apiServiceKey = svcAptRentServiceKey;
+               apiParamJson = { 'LAWD_CD' : req.query.page, 'DEAL_YMD' : req.query.perPage }
+               break;
+            // 국토교통부_오피스텔 매매 신고 조회 서비스
+            case svcOffiTrade:  
+               apiUrl = svcOffiTradeDUrl;
+               apiServiceKey = svcOffiTradeServiceKey;
+               apiParamJson = { 'LAWD_CD' : req.query.page, 'DEAL_YMD' : req.query.perPage }
+               break;
+            // 국토교통부_오피스텔 전월세 신고 조회 서비스
+            case svcOffiRent:  
+               apiUrl = svcOffiRentUrl;
+               apiServiceKey = svcOffiRentServiceKey;
+               apiParamJson = { 'LAWD_CD' : req.query.page, 'DEAL_YMD' : req.query.perPage }
+               break;
+            // 국토교통부_단독/다가구 매매 실거래 자료
+            case svcSHTrade:  
+               apiUrl = svcSHTradeUrl;
+               apiServiceKey = svcSHTradeServiceKey;
+               apiParamJson = { 'LAWD_CD' : req.query.page, 'DEAL_YMD' : req.query.perPage }
+               break;
+            // 국토교통부_단독/다가구 전월세 자료
+            case svcSHRent:  
+               apiUrl = svcSHRentUrl;
+               apiServiceKey = svcSHRentServiceKey;
+               apiParamJson = { 'LAWD_CD' : req.query.page, 'DEAL_YMD' : req.query.perPage }
+               break;
+            // 국토교통부_연립다세대 매매 실거래자료
+            case svcRHTrade:  
+               apiUrl = svcRHTradeUrl;
+               apiServiceKey = svcRHTradeServiceKey;
+               apiParamJson = { 'LAWD_CD' : req.query.page, 'DEAL_YMD' : req.query.perPage }
+               break;
+            // 국토교통부_연립다세대 전월세 자료
+            case svcRHRent:  
+               apiUrl = svcRHRentUrl;
+               apiServiceKey = svcRHRentServiceKey;
+               apiParamJson = { 'LAWD_CD' : req.query.page, 'DEAL_YMD' : req.query.perPage }
+               break;               
+            // 국토교통부_등록번호용 지역코드_20201231
             case molitLawdCD:  
                apiUrl = molitLawdCDUrl;
                apiServiceKey = molitLawdCDServiceKey;
                apiParamJson = { 'page' : req.query.page, 'perPage' : req.query.perPage }
                break;
+
             default:
                break;
                
