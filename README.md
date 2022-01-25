@@ -32,4 +32,5 @@
 # DB
  - postgresql
 
-# Graphql
+# API 통신
+ - Graphql
